@@ -53,30 +53,46 @@ function Contact(firstName, lastName, address, number){
 
 
 // Functions ------------------------
-
 function displayContacts(currentBook) {
   var displayedList = $("#landingZone");
   var htmlForListDisplay = "";
 
   currentBook.contacts.forEach(function(contact) {
-    htmlForListDisplay += "<h5 id=" + contact.id + ">" + contact.firstName + "<br>" + contact.lastName + "<br>" + contact.address + "<br>" + contact.number + "</h5>" + "<button type=" + '"button" id=' + '"' + contact.id + '" class=' + '"deleteButton"' + ">Delete</button>";
+    htmlForListDisplay += "<li id=" + contact.id + ">" + contact.firstName + " " + contact.lastName + "<br>" + "</li>";
   });
   displayedList.html(htmlForListDisplay);
 };
 
+// Adds interactive functionality to show and delete peeps
+function attachContactListeners() {
+  $("ul#landingZone").on("click", "li", function() {
+    showContact(this.id);
+  });
+  $("#buttons").on("click", ".deleteButton", function() {
+    newAddressBook.deleteContact(this.id);
+    $("#show-contact").hide();
+    displayContacts(newAddressBook);
+  });
+};
 
-function destroyerOfContacts() {
-    $("#landingZone").on("click", ".deleteButton", function() {
-        newAddressBook.deleteContact(this.id);
-        displayContacts(newAddressBook);
-      });
-    };
+function showContact(id) {
+  var contact = newAddressBook.findContact(id);
+  $("#show-contact").show();
+  $(".first-name").html(contact.firstName);
+  $(".last-name").html(contact.lastName);
+  $(".address").html(contact.address);
+  $(".phone-number").html(contact.number);
+  var buttons = $("#buttons");
+  buttons.empty();
+  buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>");
+}
+
 
 
 
 // User Input logic ---------------------
 $(document).ready(function(){
-  destroyerOfContacts();
+  attachContactListeners();
   $("#contactForm").submit(function(event){
     event.preventDefault();
 
