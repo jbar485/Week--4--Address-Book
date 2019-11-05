@@ -1,64 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <script src="js/jquery-3.4.1.js" charset="utf-8"></script>
-    <script src="js/scripts.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <meta charset="utf-8">
-    <title>Address BooC</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="jumbotron">
-        <h1>Address Book</h1>
-      </div>
+<head>
+  <script src="js/jquery-3.4.1.js" charset="utf-8"></script>
+  <script src="js/scripts.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <meta charset="utf-8">
+  <title>Address BooC</title>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Address Book</h1>
+    </div>
 
-      <form id="contactForm">
-        <h4>Contact</h4>
-        <label for="contactFirstName">First name: </label>
-        <input type="text" id="contactFirstName">
-        <br>
-        <label for="contactLastName">Last name: </label>
-        <input type="text" id="contactLastName">
-        <br>
-        <label for="contactNumber">Phone number: </label>
-        <input type="text" id="contactNumber">
-        <br>
-        <h4>Address</h4>
-        <label for="contactStreet">Street: </label>
-        <input type="text" id="contactStreet">
-        <br>
-        <label for="contactCity">City: </label>
-        <input type="text" id="contactCity">
-        <br>
-        <label for="contactState">State: </label>
-        <input type="text" id="contactState">
-        <br>
-        <label for="contactZipcode">Zipcode: </label>
-        <input type="text" id="contactZipcode">
-        <br>
-        <label for="contactCountry">Country: </label>
-        <input type="text" id="contactCountry">
-        <br>
-        <label for="contactEmail">Email: </label>
-        <input type="text" id="contactEmail">
-        <br>
+    <form id="contactForm">
 
-        <button type="submit" name="button">Submit</button>
-      </form>
+      <h4>Contact</h4>
+      <label for="contactFirstName">First name: </label>
+      <input type="text" id="contactFirstName">
+      <br>
+      <label for="contactLastName">Last name: </label>
+      <input type="text" id="contactLastName">
+      <br>
+      <label for="contactNumber">Phone number: </label>
+      <input type="text" id="contactNumber">
+      <br>
+      <label for="contactEmail">Email: </label>
+      <input type="text" id="contactEmail">
+      <br>
+      <h4>Address</h4>
+      <label for="contactStreet">Street: </label>
+      <input type="text" id="contactStreet">
+      <br>
+      <label for="contactCity">City: </label>
+      <input type="text" id="contactCity">
+      <br>
+      <label for="contactState">State: </label>
+      <input type="text" id="contactState">
+      <br>
+      <label for="contactZipcode">Zipcode: </label>
+      <input type="text" id="contactZipcode">
+      <br>
+      <label for="contactCountry">Country: </label>
+      <input type="text" id="contactCountry">
+      <br>
+      <button type="submit" name="button">Submit</button>
+    </form>
 
-        <ul id="landingZone"></ul>
+    <form class="addressList">
+      <h4>Additional Address</h4>
+      <label for="addContactStreet">Street: </label>
+      <input type="text" id="addContactStreet">
+      <br>
+      <label for="addContactCity">City: </label>
+      <input type="text" id="addContactCity">
+      <br>
+      <label for="addContactState">State: </label>
+      <input type="text" id="addContactState">
+      <br>
+      <label for="addContactZipcode">Zipcode: </label>
+      <input type="text" id="addContactZipcode">
+      <br>
+      <label for="addContactCountry">Country: </label>
+      <input type="text" id="addContactCountry">
+      <br>
+      <button type="submit" name="button">Submit</button>
+    </form>
 
-      <div id="show-contact">
-        <p>First Name: <span class="first-name"></span></p>
-        <p>Last Name: <span class="last-name"></span></p>
-        <p>Phone Number: <span class="phone-number"></span></p>
-        <p>Email: <span class="email"></span></p>
-        <p>Address: <span class="address"></span></p>
+    <ul id="landingZone"></ul>
+
+    <div id="show-contact">
+      <p>First Name: <span class="first-name"></span></p>
+      <p>Last Name: <span class="last-name"></span></p>
+      <p>Phone Number: <span class="phone-number"></span></p>
+      <p>Email: <span class="email"></span></p>
+      <p>Address: <span class="address"></span></p>
       <div id="buttons">
       </div>
 
     </div>
   </body>
-</html>
+  </html>

@@ -5,3 +5,7 @@ h1 {
 #show-contact {
   display: none;
 }
+
+.addressList {
+  display: none;
+}

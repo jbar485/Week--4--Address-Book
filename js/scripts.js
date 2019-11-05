@@ -52,12 +52,13 @@ AddressBook.prototype.deleteContact = function(id){
 
 
 // Contact logic ------------------
-function Contact(firstName, lastName, number, address, email){
+function Contact(firstName, lastName, number, address, email, secondAddress){
   this.firstName = firstName;
   this.lastName = lastName;
   this.number = number;
   this.address = address;
   this.email = email;
+  this.secondAddress = [];
 }
 
 // Contact.prototype.fullName = function() {
@@ -86,11 +87,34 @@ function attachContactListeners() {
     $("#show-contact").hide();
     displayContacts(newAddressBook);
   });
+  $("#buttons").on("click", ".addButton", function() {
+    $(".addressList").show();
+    displayContacts(newAddressBook);
+  });
 };
 
 function showContact(id) {
   var contact = newAddressBook.findContact(id);
   var contactAddress = contact.address.makeString();
+
+  //Add additional Contact
+  $(".addressList").submit(function(event){
+    event.preventDefault();
+    var currentContact = newAddressBook.findContact(id);
+    var contactSecondAddress = currentContact.secondAddress;
+
+    var additAddress = new PhysicalAddress(
+      $("#addContactStreet").val(),
+      $("#addContactCity").val(),
+      $("#addContactState").val(),
+      $("#addContactZipcode").val(),
+      $("#addContactCountry").val(),
+    );
+    contactSecondAddress.push(additAddress);
+    displayContacts(newAddressBook);
+    $(".addressList").hide();
+    console.log(contactSecondAddress);
+  });
 
   console.log(contactAddress);
   $("#show-contact").show();
@@ -102,6 +126,8 @@ function showContact(id) {
   var buttons = $("#buttons");
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>");
+  buttons.append("<button class='addButton' id=" + contact.id + ">Add Address</button>");
+  buttons.append("<button class='addContact' id=" + contact.id + ">Add Contact</button>");
 }
 
 
@@ -112,7 +138,6 @@ $(document).ready(function(){
   $("#contactForm").submit(function(event){
     event.preventDefault();
 
-
     var newAddress = new PhysicalAddress(
       $("#contactStreet").val(),
       $("#contactCity").val(),
@@ -120,7 +145,6 @@ $(document).ready(function(){
       $("#contactZipcode").val(),
       $("#contactCountry").val(),
     );
-
 
     var newContact = new Contact(
       $("#contactFirstName").val(),
@@ -133,5 +157,6 @@ $(document).ready(function(){
     newAddressBook.addContact(newContact);
     displayContacts(newAddressBook);
     $('#contactForm')[0].reset();
+    $("#contactForm").hide();
   });
 });
