@@ -59,14 +59,14 @@ function displayContacts(currentBook) {
   var htmlForListDisplay = "";
 
   currentBook.contacts.forEach(function(contact) {
-    htmlForListDisplay += "<h5 id=" + contact.id + ">" + contact.firstName + "<br>" + contact.lastName + "<br>" + contact.address + "<br>" + contact.number + "</h5>" + "<button type=" + '"button" id=' + '"' + contact.id + '">Delete</button>' ;
+    htmlForListDisplay += "<h5 id=" + contact.id + ">" + contact.firstName + "<br>" + contact.lastName + "<br>" + contact.address + "<br>" + contact.number + "</h5>" + "<button type=" + '"button" id=' + '"' + contact.id + '" class=' + '"deleteButton"' + ">Delete</button>";
   });
   displayedList.html(htmlForListDisplay);
 };
 
 
 function destroyerOfContacts() {
-    $("#landingZone").on("click", "button", function() {
+    $("#landingZone").on("click", ".deleteButton", function() {
         newAddressBook.deleteContact(this.id);
         displayContacts(newAddressBook);
       });
