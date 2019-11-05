@@ -3,6 +3,18 @@ function AddressBook(){
   this.currentId = 0;
 }
 
+function PhysicalAddress(street, city, state, zipcode, country) {
+  this.street = street;
+  this.city = city;
+  this.state = state;
+  this.zipcode = zipcode;
+  this.country = country;
+}
+
+PhysicalAddress.prototype.makeString = function(){
+     return this.street + ", " + this.city + ". " + this.state + ", " + this.zipcode + ". " + this.country + ".";
+}
+
 var newAddressBook = new AddressBook();
 
 AddressBook.prototype.addContact = function(contact){
@@ -40,11 +52,12 @@ AddressBook.prototype.deleteContact = function(id){
 
 
 // Contact logic ------------------
-function Contact(firstName, lastName, address, number){
+function Contact(firstName, lastName, number, address, email){
   this.firstName = firstName;
   this.lastName = lastName;
-  this.address = address;
   this.number = number;
+  this.address = address;
+  this.email = email;
 }
 
 // Contact.prototype.fullName = function() {
@@ -77,34 +90,48 @@ function attachContactListeners() {
 
 function showContact(id) {
   var contact = newAddressBook.findContact(id);
+  var contactAddress = contact.address.makeString();
+
+  console.log(contactAddress);
   $("#show-contact").show();
   $(".first-name").html(contact.firstName);
   $(".last-name").html(contact.lastName);
-  $(".address").html(contact.address);
   $(".phone-number").html(contact.number);
+  $(".email").html(contact.email);
+  $(".address").html(contactAddress);
   var buttons = $("#buttons");
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>");
 }
 
 
-
-
 // User Input logic ---------------------
 $(document).ready(function(){
   attachContactListeners();
+
   $("#contactForm").submit(function(event){
     event.preventDefault();
+
+
+    var newAddress = new PhysicalAddress(
+      $("#contactStreet").val(),
+      $("#contactCity").val(),
+      $("#contactState").val(),
+      $("#contactZipcode").val(),
+      $("#contactCountry").val(),
+    );
 
 
     var newContact = new Contact(
       $("#contactFirstName").val(),
       $("#contactLastName").val(),
-      $("#contactAddress").val(),
       $("#contactNumber").val(),
+      newAddress,
+      $("#contactEmail").val(),
     );
+
     newAddressBook.addContact(newContact);
     displayContacts(newAddressBook);
+    $('#contactForm')[0].reset();
   });
-  $('#contactForm')[0].reset();
 });
